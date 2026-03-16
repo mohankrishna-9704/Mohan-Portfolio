@@ -20,6 +20,8 @@ import { ThemeToggle } from './components/ui/ThemeToggle';
 import { NowPlaying } from './components/ui/NowPlaying';
 import { SectionReveal } from './components/ui/SectionReveal';
 import { useSound } from './lib/SoundContext';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 const AppContent = () => {
   const { soundEnabled, toggleSound } = useSound();
@@ -72,6 +74,8 @@ const AppContent = () => {
           </main>
         </div>
       )}
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 };
