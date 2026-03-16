@@ -61,7 +61,7 @@ export const LoadingScreen = ({ onComplete }) => {
     >
       {/* Background Grid */}
       <div className="absolute inset-0 z-0 opacity-10" 
-           style={{ backgroundImage: 'radial-gradient(#000 2px, transparent 2px)', backgroundSize: '30px 30px' }} />
+           style={{ backgroundImage: 'radial-gradient(#1A1A1A 2px, transparent 2px)', backgroundSize: '30px 30px' }} />
 
       <div className="relative z-10 w-full max-w-md">
         {/* Animated Blocks */}
@@ -93,7 +93,7 @@ export const LoadingScreen = ({ onComplete }) => {
         </div>
 
         {/* Progress Bar Container */}
-        <div className="w-full h-8 brutal-border bg-white p-1">
+        <div className="w-full h-8 brutal-border bg-bg-brutal p-1">
           <motion.div 
             className="h-full bg-text-brutal"
             initial={{ width: '0%' }}

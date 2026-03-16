@@ -4,7 +4,8 @@ import { Github, Linkedin, ArrowRight, FileText } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
 import { Badge } from '../ui/Badge';
-import { Avatar3D } from '../ui/Avatar3D';
+import { InteractiveShapes } from '../ui/InteractiveShapes';
+import { DraggableStickers } from '../ui/DraggableStickers';
 
 export const Hero = () => {
   const [typingText, setTypingText] = useState('');
@@ -26,6 +27,9 @@ export const Hero = () => {
 
   return (
     <section className="min-h-screen pt-40 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden" id="home">
+      <div className="hidden md:block">
+        <DraggableStickers />
+      </div>
       
       {/* Floating Elements (Border Charcoal & Primary Red) */}
       <motion.div 
@@ -54,7 +58,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-[3.5rem] sm:text-6xl lg:text-[5.5rem] xl:text-[7rem] font-black font-display tracking-tighter leading-[0.9] mb-6 uppercase text-text-brutal drop-shadow-[4px_4px_0_#FF3B30]"
+              className="text-[3.5rem] sm:text-6xl lg:text-[5.5rem] xl:text-[7rem] font-black font-display tracking-tighter leading-[0.9] mb-6 uppercase text-text-brutal drop-shadow-[4px_4px_0_#1A1A1A]"
             >
               DATA SCIENCE & <br/> TECH DEVELOPING
             </motion.h1>
@@ -65,9 +69,14 @@ export const Hero = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="w-full lg:max-w-3xl mb-10"
             >
-              <div 
-                className="bg-black text-tertiary-brutal brutal-border brutal-shadow p-6 transform -rotate-1 cursor-pointer group hover:rotate-0 transition-transform duration-300"
-                onClick={() => setIsAboutExpanded(!isAboutExpanded)}
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-text-brutal text-bg-brutal brutal-border brutal-shadow p-6 transform -rotate-1 cursor-pointer group hover:rotate-0 transition-all duration-300 relative z-20"
+                onClick={() => {
+                  console.log("Card clicked");
+                  setIsAboutExpanded(!isAboutExpanded);
+                }}
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-display font-black text-xl uppercase tracking-tighter text-primary-brutal">
@@ -100,7 +109,7 @@ export const Hero = () => {
                     </p>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             </motion.div>
             
             <motion.div 
@@ -136,7 +145,7 @@ export const Hero = () => {
             transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
             className="lg:col-span-4 hidden lg:flex items-center justify-end"
           >
-             <Avatar3D />
+             <InteractiveShapes />
           </motion.div>
 
         </div>

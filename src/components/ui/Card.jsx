@@ -7,7 +7,7 @@ export const Card = ({ children, className = '', noPadding = false, hover = fals
     
   const hasBg = className && className.includes('bg-');
   return (
-    <div className={`${hasBg ? '' : 'bg-white'} brutal-border brutal-shadow ${noPadding ? '' : 'p-6'} ${hoverEffects} ${className}`}>
+    <div className={`${hasBg ? '' : 'bg-bg-brutal'} brutal-border brutal-shadow ${noPadding ? '' : 'p-6'} ${hoverEffects} ${className}`}>
       {children}
     </div>
   );

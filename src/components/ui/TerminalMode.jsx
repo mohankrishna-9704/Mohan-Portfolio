@@ -78,10 +78,11 @@ export const TerminalMode = () => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-8 left-8 z-50 p-4 bg-bg-brutal text-text-brutal brutal-border brutal-shadow-sm hover:-translate-y-1 hover:brutal-shadow-hover hover:bg-black hover:text-white brutal-transition hidden md:flex items-center gap-2"
+          data-terminal-toggle
+          className="fixed bottom-32 left-4 md:bottom-8 md:left-8 z-50 p-3 md:p-4 bg-bg-brutal text-text-brutal brutal-border brutal-shadow-sm hover:-translate-y-1 hover:brutal-shadow-hover hover:bg-text-brutal hover:text-bg-brutal brutal-transition flex items-center gap-2"
         >
           <TerminalIcon className="w-5 h-5" />
-          <span className="font-mono font-bold">Terminal</span>
+          <span className="font-mono font-bold hidden sm:inline">Terminal</span>
         </motion.button>
       )}
 
@@ -94,32 +95,32 @@ export const TerminalMode = () => {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95, y: 50 }}
-            className={`fixed z-[100] ${isMaximized ? 'inset-4 inline-block' : 'bottom-24 left-8 w-[500px] h-[400px]'} bg-black brutal-border brutal-shadow flex flex-col pointer-events-auto`}
+            className={`fixed z-[100] ${isMaximized ? 'inset-2 md:inset-4 inline-block' : 'bottom-4 left-4 md:bottom-24 md:left-8 w-[calc(100vw-32px)] md:w-[500px] h-[250px] md:h-[400px]'} bg-bg-brutal text-text-brutal brutal-border brutal-shadow flex flex-col pointer-events-auto`}
           >
             {/* Window Header - Drag Handle */}
             <div className="bg-text-brutal px-4 py-2 flex justify-between items-center border-b-4 border-black cursor-move select-none">
               <div className="flex items-center gap-3 text-bg-brutal">
                 <TerminalIcon className="w-4 h-4" />
-                <span className="font-mono text-sm font-bold">mohan@portfolio: ~</span>
+                <span className="font-mono text-sm font-bold truncate">mohan@portfolio: ~</span>
               </div>
-              <div className="flex items-center gap-4">
-                <button onClick={() => setIsMaximized(!isMaximized)} className="text-bg-brutal hover:text-primary-brutal">
-                  {isMaximized ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              <div className="flex items-center gap-2">
+                <button onClick={() => setIsMaximized(!isMaximized)} className="text-bg-brutal hover:text-primary-brutal p-1">
+                  {isMaximized ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
                 </button>
-                <button onClick={() => setIsOpen(false)} className="text-bg-brutal hover:text-primary-brutal">
-                  <X className="w-5 h-5" />
+                <button onClick={() => setIsOpen(false)} className="text-bg-brutal hover:text-primary-brutal p-1">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
             {/* Terminal Body */}
-            <div className="flex-grow p-4 overflow-y-auto font-mono text-sm space-y-2 text-white">
+            <div className="flex-grow p-3 overflow-y-auto font-mono text-xs md:text-sm space-y-1.5 text-text-brutal">
               {output.map((line, i) => (
-                <div key={i} className={`${line.type === 'input' ? 'text-white' : line.type === 'system' ? 'text-primary-brutal' : 'text-tertiary-brutal'} whitespace-pre-wrap`}>
+                <div key={i} className={`${line.type === 'input' ? 'text-text-brutal font-bold' : line.type === 'system' ? 'text-primary-brutal font-bold' : 'text-text-brutal/80'} whitespace-pre-wrap`}>
                   {line.text}
                 </div>
               ))}
-              <div className="flex items-center gap-2 text-white">
+              <div className="flex items-center gap-2 text-text-brutal pb-2">
                 <span>{`>`}</span>
                 <input
                   type="text"
@@ -127,7 +128,7 @@ export const TerminalMode = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleCommand}
                   autoFocus
-                  className="bg-transparent outline-none flex-grow text-white caret-primary-brutal"
+                  className="bg-transparent outline-none flex-grow text-text-brutal caret-primary-brutal"
                   spellCheck="false"
                 />
               </div>

@@ -1,37 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+/* Inter, IBM Plex Mono, Space Grotesk from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-bg-brutal: #F5F5F5;
-  --color-text-brutal: #111111;
-  --color-border-brutal: #1A1A1A;
-  
-  --color-primary-brutal: #FF3B30;
-  --color-secondary-brutal: #111111; /* Black for high contrast elements */
-  --color-tertiary-brutal: #FFFFFF; /* Pure White */
+  /* ===== BRUTALIST RED SYSTEM (DEFAULT/LIGHT) ===== */
+  --color-bg-brutal: #F5F5F5;       /* Soft Paper White */
+  --color-text-brutal: #111111;     /* Jet Black */
+  --color-border-brutal: #1A1A1A;   /* Charcoal */
 
+  --color-primary-brutal: #FF3B30;  /* Brutalist Red */
+  --color-hover-brutal: #E6352B;    /* Dark Red Hover */
+  --color-secondary-brutal: #2563EB; /* Electric Blue */
+  --color-tertiary-brutal: #F5F5F5; /* White for contrast text */
+
+  /* ===== TYPOGRAPHY ===== */
   --font-sans: 'Inter', sans-serif;
-  --font-mono: '"IBM Plex Mono"', monospace;
-  --font-display: '"Space Grotesk"', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-display: 'Space Grotesk', sans-serif;
 }
 
 @layer base {
+  /* DARK THEME SYSTEM OVERRIDES */
+  html.dark {
+    --color-bg-brutal: #111111;       /* Jet Black Background */
+    --color-text-brutal: #F5F5F5;     /* Soft Paper White Text */
+    --color-border-brutal: #E5E5E5;   /* Light Grey Borders */
+    --color-primary-brutal: #FF3B30;  /* Brutalist Red (kept) */
+    --color-hover-brutal: #E6352B;    
+    --color-secondary-brutal: #3B82F6; /* Lighter Blue */
+    --color-tertiary-brutal: #111111; /* Dark for contrast text */
+  }
+
   body {
     background-color: var(--color-bg-brutal);
     color: var(--color-text-brutal);
     font-family: var(--font-sans);
     line-height: inherit;
     overscroll-behavior: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
   }
-  
+
   ::selection {
     background-color: var(--color-primary-brutal);
-    color: #fff;
+    color: var(--color-tertiary-brutal);
   }
 }
 
@@ -54,7 +70,7 @@
   .brutal-border-r {
     border-right: 4px solid var(--color-border-brutal);
   }
-  
+
   .brutal-shadow {
     box-shadow: 8px 8px 0px var(--color-border-brutal);
   }
@@ -67,9 +83,59 @@
   .brutal-shadow-none {
     box-shadow: 0px 0px 0px transparent;
   }
-  
+
   .brutal-transition {
     transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
+
+/* ===== RGB GLITCH EFFECT ===== */
+@keyframes glitch-r {
+  0%   { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
+  20%  { clip-path: inset(40% 0 50% 0); transform: translate(3px, 0); }
+  40%  { clip-path: inset(70% 0 20% 0); transform: translate(-2px, 0); }
+  60%  { clip-path: inset(20% 0 70% 0); transform: translate(2px, 0); }
+  80%  { clip-path: inset(60% 0 10% 0); transform: translate(-3px, 0); }
+  100% { clip-path: inset(0 0 95% 0); transform: translate(0, 0); }
+}
+@keyframes glitch-b {
+  0%   { clip-path: inset(90% 0 0 0); transform: translate(3px, 0); }
+  20%  { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 0); }
+  40%  { clip-path: inset(55% 0 30% 0); transform: translate(2px, 0); }
+  60%  { clip-path: inset(30% 0 55% 0); transform: translate(-2px, 0); }
+  80%  { clip-path: inset(75% 0 15% 0); transform: translate(3px, 0); }
+  100% { clip-path: inset(90% 0 0 0); transform: translate(0, 0); }
+}
+
+.glitch-img {
+  position: relative;
+  overflow: hidden;
+}
+.glitch-img::before,
+.glitch-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.glitch-img:hover::before {
+  opacity: 0.7;
+  background-blend-mode: screen;
+  background-color: rgba(255, 0, 0, 0.35);
+  animation: glitch-r 0.4s steps(2) infinite;
+}
+.glitch-img:hover::after {
+  opacity: 0.7;
+  background-blend-mode: screen;
+  background-color: rgba(0, 50, 255, 0.25);
+  animation: glitch-b 0.4s steps(2) infinite 0.1s;
+}
+
+/* Cursor override */
+body { cursor: none; }
+
 

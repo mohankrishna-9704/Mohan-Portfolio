@@ -6,24 +6,24 @@ export const BackgroundElements = () => {
     <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
       {/* Primary Blueprint Grid */}
       <div className="absolute inset-0 opacity-[0.08]" 
-           style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
+           style={{ backgroundImage: 'linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px)', backgroundSize: '100px 100px' }} />
       
       {/* Secondary Sub-grid */}
       <div className="absolute inset-0 opacity-[0.03]" 
-           style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+           style={{ backgroundImage: 'linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
 
       {/* Decorative Crosshairs (Blueprint Markers) */}
       <div className="absolute top-[10%] left-[10%] w-10 h-10 opacity-30">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-black" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-black" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border-brutal" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-border-brutal" />
       </div>
       <div className="absolute top-[40%] right-[15%] w-10 h-10 opacity-30">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-black" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-black" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border-brutal" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-border-brutal" />
       </div>
       <div className="absolute bottom-[20%] left-[20%] w-10 h-10 opacity-30">
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-black" />
-        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-black" />
+        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-border-brutal" />
+        <div className="absolute top-0 left-1/2 w-[1px] h-full bg-border-brutal" />
       </div>
 
       {/* Floating Shapes */}

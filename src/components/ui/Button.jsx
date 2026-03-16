@@ -6,8 +6,8 @@ export const Button = ({ children, className = '', variant = 'primary', ...props
   const variants = {
     primary: 'bg-primary-brutal text-white',
     secondary: 'bg-secondary-brutal text-white',
-    tertiary: 'bg-white text-text-brutal',
-    white: 'bg-white text-text-brutal',
+    tertiary: 'bg-bg-brutal text-text-brutal',
+    white: 'bg-bg-brutal text-text-brutal',
     dark: 'bg-secondary-brutal text-white'
   };
 

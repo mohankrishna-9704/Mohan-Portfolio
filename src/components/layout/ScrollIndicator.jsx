@@ -36,7 +36,7 @@ export const ScrollIndicator = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: showTopBtn ? 1 : 0, y: showTopBtn ? 0 : 50 }}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className={`fixed bottom-8 right-8 z-[60] p-4 bg-primary-brutal text-bg-brutal brutal-border brutal-shadow-sm hover:-translate-y-2 hover:brutal-shadow-hover hover:bg-white hover:text-text-brutal brutal-transition ${showTopBtn ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        className={`fixed bottom-8 right-8 z-[60] p-4 bg-primary-brutal text-bg-brutal brutal-border brutal-shadow-sm hover:-translate-y-2 hover:brutal-shadow-hover hover:bg-bg-brutal hover:text-text-brutal brutal-transition ${showTopBtn ? 'pointer-events-auto' : 'pointer-events-none'}`}
       >
         <ArrowUp className="w-6 h-6 stroke-[3px]" />
       </motion.button>

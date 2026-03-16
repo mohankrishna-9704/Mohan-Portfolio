@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Briefcase, GraduationCap, ChevronDown, ChevronUp } from 'lucide-react';
+import { Award, Briefcase, GraduationCap, ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
 import { Card } from '../ui/Card';
 
 const ExperienceCard = ({ exp, index }) => {
@@ -57,11 +57,23 @@ const ExperienceCard = ({ exp, index }) => {
                   <ul className="space-y-3 font-medium text-base pt-4 mt-4 border-t-2 border-border-brutal/10">
                     {exp.bullets.map((bullet, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <span className="text-primary-brutal mt-0.5 font-black leading-none">{'->'}</span>
+                        <span className="text-primary-brutal mt-0.5 font-black leading-none">{'→'}</span>
                         <span>{bullet}</span>
                       </li>
                     ))}
                   </ul>
+
+                  {/* Key Courses (for education entries) */}
+                  {exp.courses && (
+                    <div className="mt-4 pt-3 border-t-2 border-dashed border-border-brutal/20">
+                      <p className="font-mono font-black text-xs uppercase mb-2 text-secondary-brutal">Key Courses</p>
+                      <div className="flex flex-wrap gap-2">
+                        {exp.courses.map(c => (
+                          <span key={c} className="text-xs font-mono font-bold px-2 py-1 bg-secondary-brutal text-white brutal-border">{c}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -76,22 +88,51 @@ export const Experience = () => {
   const experiences = [
     {
       title: "Bachelor of Engineering in CSE",
-      company: "University",
-      date: "Present",
-      type: "Student",
-      icon: <GraduationCap className="w-6 h-6" />,
+      company: "Sri Venkateswara College of Engineering and Technology",
+      date: "2022 – 2026",
+      type: "Chittoor, AP • CGPA: 7.5",
+      icon: <GraduationCap className="w-5 h-5 text-white" />,
       color: "bg-primary-brutal text-white",
       bullets: [
-        "Focusing on Computer Science and Engineering (General).",
-        "Strong interest in Tech Developing, Data Science, and Machine Learning.",
-        "Building practical projects in IoT and AI."
-      ]
+        "Specialization in Data Science and Machine Learning.",
+        "Led the college's AI/ML study group for peer learning sessions.",
+        "Developed multiple real-world projects in IoT and predictive modeling.",
+        "Active participant in hackathons and technical fests."
+      ],
+      courses: ["Data Structures", "Machine Learning", "DBMS", "Operating Systems", "Deep Learning", "Cloud Computing"]
+    },
+    {
+      title: "Class XII (Intermediate)",
+      company: "Sri Chaitanya Junior College",
+      date: "2020 – 2022",
+      type: "Andhra Pradesh • 91.2%",
+      icon: <BookOpen className="w-5 h-5 text-white" />,
+      color: "bg-secondary-brutal text-white",
+      bullets: [
+        "Maths, Physics, and Chemistry stream.",
+        "Scored 91.2% in state board examinations.",
+        "Developed foundational analytical and problem-solving skills."
+      ],
+      courses: ["Mathematics", "Physics", "Chemistry"]
+    },
+    {
+      title: "Class X (SSC)",
+      company: "ZP High School",
+      date: "2019 – 2020",
+      type: "Andhra Pradesh • 97.5%",
+      icon: <Award className="w-5 h-5 text-white" />,
+      color: "bg-primary-brutal text-white",
+      bullets: [
+        "Scored 97.5% in state board SSC examinations.",
+        "School topper in Mathematics and Science.",
+        "Recipient of the State Merit Scholarship."
+      ],
+      courses: ["Mathematics", "Science", "Social Studies", "English"]
     }
   ];
 
   return (
     <section id="experience" className="py-24 bg-bg-brutal border-y-[6px] border-border-brutal overflow-hidden relative">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -100,9 +141,10 @@ export const Experience = () => {
           className="mb-16 text-center"
         >
           <h2 className="text-5xl md:text-7xl font-black font-display uppercase inline-block relative">
-            <span className="relative z-10">Journey</span>
+            <span className="relative z-10">Education & Journey</span>
             <div className="absolute bottom-2 left-[-10px] right-[-10px] h-6 bg-secondary-brutal z-0 -rotate-2" />
           </h2>
+          <p className="font-mono font-bold text-sm text-gray-500 mt-6">Click each card to expand details.</p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto relative">

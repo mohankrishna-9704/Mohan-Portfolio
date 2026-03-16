@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Badge = ({ children, className = '', color = 'white' }) => {
   const colors = {
-    white: 'bg-white text-text-brutal',
+    white: 'bg-bg-brutal text-text-brutal',
     red: 'bg-primary-brutal text-white',
     black: 'bg-secondary-brutal text-white',
     dark: 'bg-secondary-brutal text-white'
