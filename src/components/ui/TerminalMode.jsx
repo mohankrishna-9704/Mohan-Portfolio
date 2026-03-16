@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal as TerminalIcon, X, Maximize2, Minimize2 } from 'lucide-react';
+import { useIdle } from '../../lib/hooks';
 
 export const TerminalMode = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,7 @@ export const TerminalMode = () => {
     { type: 'system', text: 'Type "help" to see available commands.' }
   ]);
   const endRef = useRef(null);
+  const isIdle = useIdle(5000);
 
   const scrollToBottom = () => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -76,10 +78,14 @@ export const TerminalMode = () => {
       {!isOpen && (
         <motion.button
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          animate={{ 
+            scale: isIdle ? 0 : 1,
+            opacity: isIdle ? 0 : 1
+          }}
+          transition={{ duration: 0.5 }}
           onClick={() => setIsOpen(true)}
           data-terminal-toggle
-          className="fixed bottom-32 left-4 md:bottom-8 md:left-8 z-50 p-3 md:p-4 bg-bg-brutal text-text-brutal brutal-border brutal-shadow-sm hover:-translate-y-1 hover:brutal-shadow-hover hover:bg-text-brutal hover:text-bg-brutal brutal-transition flex items-center gap-2"
+          className={`fixed bottom-32 left-4 md:bottom-8 md:left-8 z-50 p-3 md:p-4 bg-bg-brutal text-text-brutal brutal-border brutal-shadow-sm hover:-translate-y-1 hover:brutal-shadow-hover hover:bg-text-brutal hover:text-bg-brutal brutal-transition flex items-center gap-2 ${isIdle ? 'pointer-events-none' : 'pointer-events-auto'}`}
         >
           <TerminalIcon className="w-5 h-5" />
           <span className="font-mono font-bold hidden sm:inline">Terminal</span>

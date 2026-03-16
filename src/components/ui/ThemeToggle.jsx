@@ -3,12 +3,14 @@ import { Sun, Moon, Monitor, ChevronDown, Volume2, VolumeX } from 'lucide-react'
 import { useTheme } from '../../lib/ThemeContext';
 import { useSound } from '../../lib/SoundContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIdle } from '../../lib/hooks';
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
   const { muted, setMuted, play } = useSound();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const isIdle = useIdle(5000);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,7 +38,12 @@ export const ThemeToggle = () => {
   ];
 
   return (
-    <div className="fixed top-4 right-4 md:top-8 md:right-8 z-[100] flex items-center gap-2" ref={dropdownRef}>
+    <motion.div 
+      animate={{ opacity: isIdle ? 0 : 1 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-4 right-4 md:top-8 md:right-8 z-[100] flex items-center gap-2 ${isIdle ? 'pointer-events-none' : 'pointer-events-auto'}`} 
+      ref={dropdownRef}
+    >
       {/* Sound mute toggle */}
       <button
         onClick={() => {
@@ -90,6 +97,6 @@ export const ThemeToggle = () => {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };

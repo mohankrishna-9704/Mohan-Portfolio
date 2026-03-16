@@ -28,6 +28,7 @@ export const SoundProvider = ({ children }) => {
   const [bgMusicPlaying, setBgMusicPlaying] = useState(false);
   const audioRef = useRef(null);
   const ctxRef = useRef(null);
+  const currentUrlRef = useRef(null);
 
   const getCtx = useCallback(() => {
     if (!ctxRef.current) ctxRef.current = createAudioContext();
@@ -35,43 +36,8 @@ export const SoundProvider = ({ children }) => {
     return ctxRef.current;
   }, []);
 
-  // Initialize background music audio object
-  useEffect(() => {
-    audioRef.current = new Audio();
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.4;
-    
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
-  // Handle music play/pause based on muted state and user preference
-  useEffect(() => {
-    if (!audioRef.current) return;
-    if (muted || !bgMusicPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {
-        // Autoplay might be blocked until user interacts
-        setBgMusicPlaying(false);
-      });
-    }
-  }, [muted, bgMusicPlaying]);
-
-  const toggleMusic = useCallback((url) => {
-    if (!audioRef.current) return;
-    
-    if (url && audioRef.current.src !== url) {
-      audioRef.current.src = url;
-      setBgMusicPlaying(true);
-    } else {
-      setBgMusicPlaying(prev => !prev);
-    }
-  }, []);
+  const toggleMusic = useCallback(() => {}, []);
+  const loadTrack = useCallback(() => {}, []);
 
   const play = useCallback((type) => {
     if (muted) return;
@@ -104,7 +70,7 @@ export const SoundProvider = ({ children }) => {
   }, [muted, getCtx]);
 
   return (
-    <SoundContext.Provider value={{ muted, setMuted, play, bgMusicPlaying, setBgMusicPlaying, toggleMusic }}>
+    <SoundContext.Provider value={{ muted, setMuted, play, bgMusicPlaying, setBgMusicPlaying, toggleMusic, loadTrack }}>
       {children}
     </SoundContext.Provider>
   );
@@ -112,6 +78,6 @@ export const SoundProvider = ({ children }) => {
 
 export const useSound = () => {
   const ctx = useContext(SoundContext);
-  if (!ctx) return { muted: true, setMuted: () => {}, play: () => {} };
+  if (!ctx) return { muted: true, setMuted: () => {}, play: () => {}, toggleMusic: () => {}, loadTrack: () => {} };
   return ctx;
 };
