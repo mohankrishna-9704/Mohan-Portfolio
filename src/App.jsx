@@ -42,15 +42,15 @@ const AppContent = () => {
       </AnimatePresence>
 
       {!loading && (
-        <div className="flex justify-center flex-col relative w-full overflow-x-hidden pt-20">
+        <div className="flex justify-center flex-col relative w-full overflow-x-hidden pt-12 md:pt-20">
           <BackgroundElements />
           <SideNav />
 
           {/* Floating Identity Sticker */}
-          <div className="fixed top-4 left-4 md:top-8 md:left-8 z-50">
+          <div className="hidden md:block fixed top-4 left-4 md:top-8 md:left-8 z-50">
             <a href="#" className="flex items-center gap-3 font-display font-black text-lg md:text-2xl tracking-tighter hover:text-primary-brutal brutal-transition bg-bg-brutal brutal-border brutal-shadow px-3 py-1.5 md:px-4 md:py-2 block">
               <img src="/procedural_logo_circular1_circle.png" alt="MK Logo" className="w-8 h-8 md:w-10 md:h-10 brutal-border-sm" />
-              MOHAN KRISHNA<span className="text-primary-brutal">.</span>
+              <span className="hidden md:inline">MOHAN KRISHNA</span><span className="text-primary-brutal">.</span>
             </a>
           </div>
 

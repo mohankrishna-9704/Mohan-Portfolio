@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Button = ({ children, className = '', variant = 'primary', ...props }) => {
-  const baseClasses = 'inline-flex items-center justify-center brutal-border brutal-shadow brutal-transition font-display font-bold px-6 py-3 active:translate-x-1 active:translate-y-1 active:brutal-shadow-sm hover:-translate-y-1 hover:-translate-x-1 hover:brutal-shadow-hover';
+  const baseClasses = 'inline-flex items-center justify-center brutal-border-sm md:brutal-border brutal-shadow-sm md:brutal-shadow brutal-transition font-display font-bold px-4 py-2 md:px-6 md:py-3 active:translate-x-1 active:translate-y-1 active:brutal-shadow-sm hover:-translate-y-1 hover:-translate-x-1 hover:brutal-shadow-hover';
   
   const variants = {
     primary: 'bg-primary-brutal text-white',

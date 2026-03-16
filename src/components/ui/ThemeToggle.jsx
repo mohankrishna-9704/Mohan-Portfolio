@@ -51,21 +51,21 @@ export const ThemeToggle = () => {
           setMuted(next);
           if (!next) play('theme'); // play a sound when unmuting to confirm
         }}
-        className="p-2.5 bg-bg-brutal text-text-brutal brutal-border brutal-shadow brutal-transition hover:brutal-shadow-none hover:text-primary-brutal cursor-pointer"
+        className="p-1.5 md:p-2.5 bg-bg-brutal text-text-brutal brutal-border-sm md:brutal-border brutal-shadow-sm md:brutal-shadow brutal-transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none hover:text-primary-brutal cursor-pointer"
         title={muted ? 'Enable sounds' : 'Mute sounds'}
       >
-        {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+        {muted ? <VolumeX className="w-3.5 h-3.5 md:w-4 md:h-4" /> : <Volume2 className="w-3.5 h-3.5 md:w-4 md:h-4" />}
       </button>
 
       {/* Theme dropdown */}
       <div className="relative">
         <button
           onClick={() => { setIsOpen(!isOpen); play('click'); }}
-          className="flex items-center gap-2 p-2.5 bg-bg-brutal text-text-brutal brutal-border brutal-shadow brutal-transition hover:brutal-shadow-none cursor-pointer"
+          className="flex items-center gap-1.5 p-1.5 md:gap-2 md:p-2.5 bg-bg-brutal text-text-brutal brutal-border-sm md:brutal-border brutal-shadow-sm md:brutal-shadow brutal-transition hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none cursor-pointer"
           title="Change Theme"
         >
-          {getCurrentIcon()}
-          <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <div className="scale-90 md:scale-100">{getCurrentIcon()}</div>
+          <ChevronDown className={`w-3 h-3 md:w-3.5 md:h-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
         <AnimatePresence>

@@ -140,9 +140,9 @@ export const Experience = () => {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <h2 className="text-5xl md:text-7xl font-black font-display uppercase inline-block relative">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black font-display uppercase inline-block relative">
             <span className="relative z-10">Education & Journey</span>
-            <div className="absolute bottom-2 left-[-10px] right-[-10px] h-6 bg-secondary-brutal z-0 -rotate-2" />
+            <div className="absolute bottom-2 left-[-10px] right-[-10px] h-4 md:h-6 bg-secondary-brutal z-0 -rotate-2" />
           </h2>
           <p className="font-mono font-bold text-sm text-gray-500 mt-6">Click each card to expand details.</p>
         </motion.div>

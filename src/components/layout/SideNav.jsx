@@ -65,7 +65,7 @@ export const SideNav = () => {
       {/* Mobile Hamburger Button */}
       <button 
         onClick={() => setMobileMenuOpen(true)}
-        className="md:hidden fixed top-20 right-4 z-50 p-2 brutal-border bg-bg-brutal hover:bg-text-brutal hover:text-bg-brutal brutal-transition brutal-shadow-sm group mt-1"
+        className="md:hidden fixed top-4 left-4 z-[100] p-2.5 brutal-border-sm bg-bg-brutal hover:bg-text-brutal hover:text-bg-brutal brutal-transition brutal-shadow-sm group"
       >
         <Menu className="w-6 h-6 text-text-brutal group-hover:text-bg-brutal" />
       </button>
@@ -81,12 +81,12 @@ export const SideNav = () => {
             onClick={() => setMobileMenuOpen(false)}
           >
             <motion.div 
-              initial={{ x: '100%' }}
+              initial={{ x: '-100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-0 bottom-0 w-[280px] bg-bg-brutal brutal-border-l brutal-shadow-lg p-6 flex flex-col"
+              className="absolute left-0 top-0 bottom-0 w-[280px] bg-bg-brutal brutal-border-r brutal-shadow-lg p-6 flex flex-col"
             >
               <div className="flex justify-between items-center mb-12">
                 <span className="font-display font-black text-xl tracking-tighter">NAVIGATION</span>

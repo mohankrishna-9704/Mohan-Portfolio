@@ -53,7 +53,7 @@ export const Skills = () => {
             viewport={{ once: true, margin: "-100px" }}
             className="sticky top-32"
           >
-            <h2 className="text-5xl md:text-7xl font-black font-display uppercase mb-6 leading-none">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black font-display uppercase mb-6 leading-none">
               <span className="text-secondary-brutal block mb-2">*</span>
               Tech <br /> Arsenal
             </h2>

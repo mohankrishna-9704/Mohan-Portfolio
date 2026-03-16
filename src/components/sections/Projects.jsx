@@ -189,7 +189,7 @@ export const Projects = () => {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-5xl md:text-7xl font-black font-display uppercase mb-4 flex items-center gap-4">
+        <h2 className="text-4xl sm:text-5xl md:text-7xl font-black font-display uppercase mb-4 flex items-center gap-4">
           <span className="text-primary-brutal">*</span>
           Featured Work
         </h2>

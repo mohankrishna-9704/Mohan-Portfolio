@@ -26,9 +26,25 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen pt-40 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden" id="home">
+    <section className="min-h-screen pt-16 md:pt-40 pb-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center relative overflow-hidden" id="home">
       <div className="hidden md:block">
         <DraggableStickers />
+      </div>
+
+      {/* Mobile Top Decor - Fills empty space */}
+      <div className="md:hidden flex flex-col mb-12 opacity-80 pointer-events-none">
+        <div className="flex justify-between items-end border-b-2 border-border-brutal pb-2">
+          <div className="font-mono text-[10px] font-black leading-none uppercase">
+            <span className="text-primary-brutal">#</span> User_Session_Init
+          </div>
+          <div className="font-mono text-[9px] uppercase tracking-tighter">
+            Loc: 13.21°N, 79.10°E
+          </div>
+        </div>
+        <div className="flex justify-between mt-2">
+          <div className="font-mono text-[8px] uppercase tracking-widest">Auth: Guest_User</div>
+          <div className="font-mono text-[8px] uppercase tracking-widest text-primary-brutal animate-pulse">● System_Online</div>
+        </div>
       </div>
       
       {/* Floating Elements (Border Charcoal & Primary Red) */}
@@ -58,7 +74,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-[3.5rem] sm:text-6xl lg:text-[5.5rem] xl:text-[7rem] font-black font-display tracking-tighter leading-[0.9] mb-6 uppercase text-text-brutal drop-shadow-[4px_4px_0_#1A1A1A]"
+              className="text-[2.75rem] sm:text-6xl lg:text-[5.5rem] xl:text-[7rem] font-black font-display tracking-tighter leading-[0.9] mb-6 uppercase text-text-brutal drop-shadow-[4px_4px_0_#1A1A1A]"
             >
               DATA SCIENCE & <br/> TECH DEVELOPING
             </motion.h1>
@@ -72,7 +88,7 @@ export const Hero = () => {
               <motion.div 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-text-brutal text-bg-brutal brutal-border brutal-shadow p-6 transform -rotate-1 cursor-pointer group hover:rotate-0 transition-all duration-300 relative z-20"
+                className="bg-text-brutal text-bg-brutal brutal-border-sm md:brutal-border brutal-shadow-sm md:brutal-shadow p-4 md:p-6 transform -rotate-1 cursor-pointer group hover:rotate-0 transition-all duration-300 relative z-20"
                 onClick={() => {
                   console.log("Card clicked");
                   setIsAboutExpanded(!isAboutExpanded);

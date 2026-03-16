@@ -204,13 +204,13 @@ export const NowPlaying = () => {
       animate={{ opacity: isIdle ? 0 : 1, x: 0 }}
       transition={{ delay: isIdle ? 0 : 2.5, duration: 0.5 }}
       style={{ pointerEvents: isIdle ? 'none' : 'auto' }}
-      className="fixed bottom-10 left-4 md:bottom-8 md:left-auto md:right-32 z-50 select-none"
+      className="fixed bottom-12 left-4 md:bottom-8 md:right-32 md:left-auto z-[55] select-none"
     >
-      <div className="bg-bg-brutal brutal-border brutal-shadow overflow-hidden w-64">
+      <div className={`bg-bg-brutal brutal-border brutal-shadow overflow-hidden brutal-transition ${expanded ? 'w-64' : 'w-auto md:w-64'}`}>
         
-        {/* Progress Bar */}
+        {/* Progress Bar (Hidden on mobile collapsed) */}
         <div 
-          className="h-1 bg-gray-200 cursor-pointer group relative overflow-hidden" 
+          className={`h-1 bg-gray-200 cursor-pointer group relative overflow-hidden ${!expanded && 'hidden md:block'}`} 
           onClick={handleSeek}
         >
           <motion.div 
@@ -223,10 +223,14 @@ export const NowPlaying = () => {
           <div ref={playerRef} />
         </div>
 
-        {/* Header */}
+        {/* Header / Icon Trigger */}
         <button
           onClick={() => setExpanded(e => !e)}
-          className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary-brutal/10 brutal-transition"
+          className={`flex items-center brutal-transition ${
+            expanded 
+              ? 'w-full gap-2 px-3 py-2 hover:bg-primary-brutal/10' 
+              : 'p-3 md:w-full md:gap-2 md:px-3 md:py-2 hover:bg-primary-brutal/10'
+          }`}
         >
           <div className="flex items-end gap-[3px] h-4">
             {isBuffering ? (
@@ -247,17 +251,19 @@ export const NowPlaying = () => {
               <Music className="w-4 h-4 text-primary-brutal" />
             )}
           </div>
-          <div className="flex-1 text-left overflow-hidden">
+          
+          <div className={`flex-1 text-left overflow-hidden ${!expanded && 'hidden md:block'}`}>
             <p className="font-mono font-bold text-[9px] uppercase text-primary-brutal truncate">
               {isBuffering ? '⧗ Buffering...' : isPlaying ? '♪ Now Listening' : '■ Paused'}
             </p>
             <p className="font-bold text-xs truncate">{track.title}</p>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <span className="font-mono text-[9px] text-gray-500">
+
+          <div className={`items-center gap-1 shrink-0 ${!expanded ? 'hidden md:flex' : 'flex'}`}>
+            <span className="font-mono text-[8px] md:text-[9px] text-gray-500">
               {formatTime(currentTime)}
             </span>
-            {expanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            {expanded ? <ChevronUp className="w-3 h-3 md:w-3.5 md:h-3.5" /> : <ChevronDown className="w-3 h-3 md:w-3.5 md:h-3.5" />}
           </div>
         </button>
 
