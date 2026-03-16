@@ -1,16 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Music, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { useSound } from '../../lib/SoundContext';
 
 const TRACKS = [
-  { title: 'Weightless', artist: 'Marconi Union', mood: 'Focus', link: 'https://www.youtube.com/watch?v=UfcAVejslrU' },
-  { title: 'Lo-Fi Hip Hop Radio', artist: 'Lofi Girl', mood: 'Chill', link: 'https://www.youtube.com/watch?v=jfKfPfyJRdk' },
-  { title: 'Comptine d\'un autre été', artist: 'Yann Tiersen', mood: 'Deep Work', link: 'https://www.youtube.com/watch?v=MlBYbSTwKH8' },
-  { title: 'Experience', artist: 'Ludovico Einaudi', mood: 'Flow', link: 'https://www.youtube.com/watch?v=hN_q-_nGv4U' },
-  { title: 'Time', artist: 'Hans Zimmer', mood: 'Epic', link: 'https://www.youtube.com/watch?v=RxabLA7UQ9k' },
+  { 
+    title: 'Weightless', 
+    artist: 'Marconi Union', 
+    mood: 'Focus', 
+    link: 'https://www.youtube.com/watch?v=UfcAVejslrU',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+  },
+  { 
+    title: 'Lo-Fi Chill', 
+    artist: 'Lofi Girl', 
+    mood: 'Chill', 
+    link: 'https://www.youtube.com/watch?v=jfKfPfyJRdk',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
+  },
+  { 
+    title: 'Deep Focus', 
+    artist: 'Yann Tiersen', 
+    mood: 'Work', 
+    link: 'https://www.youtube.com/watch?v=MlBYbSTwKH8',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
+  },
+  { 
+    title: 'Experience', 
+    artist: 'Ludovico Einaudi', 
+    mood: 'Flow', 
+    link: 'https://www.youtube.com/watch?v=hN_q-_nGv4U',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3'
+  },
 ];
 
-// Animated bars for the visualizer
 const Bar = ({ delay }) => (
   <motion.span
     className="inline-block w-[3px] rounded-full bg-primary-brutal"
@@ -23,16 +46,20 @@ const Bar = ({ delay }) => (
 export const NowPlaying = () => {
   const [expanded, setExpanded] = useState(false);
   const [trackIndex, setTrackIndex] = useState(0);
-  const [playing, setPlaying] = useState(true);
+  const { bgMusicPlaying, setBgMusicPlaying, toggleMusic, muted, setMuted } = useSound();
 
-  // Cycle tracks every 25s for fun
   useEffect(() => {
-    if (!playing) return;
-    const id = setInterval(() => {
-      setTrackIndex(i => (i + 1) % TRACKS.length);
-    }, 25000);
-    return () => clearInterval(id);
-  }, [playing]);
+    toggleMusic(TRACKS[trackIndex].url);
+    // Initial state is paused because of browser autoplay policies
+    setBgMusicPlaying(false);
+  }, []);
+
+  const handleTrackChange = (index) => {
+    setTrackIndex(index);
+    toggleMusic(TRACKS[index].url);
+    if (muted) setMuted(false);
+    setBgMusicPlaying(true);
+  };
 
   const track = TRACKS[trackIndex];
 
@@ -44,13 +71,12 @@ export const NowPlaying = () => {
       className="fixed bottom-10 left-4 md:bottom-8 md:left-auto md:right-32 z-50 select-none"
     >
       <div className="bg-bg-brutal brutal-border brutal-shadow overflow-hidden w-56">
-        {/* Header row */}
         <button
           onClick={() => setExpanded(e => !e)}
           className="w-full flex items-center gap-2 px-3 py-2 hover:bg-primary-brutal/5 brutal-transition"
         >
           <div className="flex items-end gap-[3px] h-4">
-            {playing ? (
+            {bgMusicPlaying && !muted ? (
               <>
                 <Bar delay={0} />
                 <Bar delay={0.2} />
@@ -63,14 +89,13 @@ export const NowPlaying = () => {
           </div>
           <div className="flex-1 text-left overflow-hidden">
             <p className="font-mono font-bold text-[10px] uppercase text-primary-brutal truncate">
-              {playing ? '♪ Now Listening' : '■ Paused'}
+              {bgMusicPlaying && !muted ? '♪ Now Listening' : '■ Paused'}
             </p>
             <p className="font-bold text-xs truncate">{track.title}</p>
           </div>
           {expanded ? <ChevronDown className="w-3.5 h-3.5 shrink-0" /> : <ChevronUp className="w-3.5 h-3.5 shrink-0" />}
         </button>
 
-        {/* Expanded track list */}
         <AnimatePresence>
           {expanded && (
             <motion.div
@@ -84,7 +109,7 @@ export const NowPlaying = () => {
                 {TRACKS.map((t, i) => (
                   <button
                     key={i}
-                    onClick={() => { setTrackIndex(i); setPlaying(true); }}
+                    onClick={() => handleTrackChange(i)}
                     className={`w-full text-left px-2 py-1.5 rounded flex items-center gap-2 brutal-transition ${
                       i === trackIndex ? 'bg-primary-brutal text-white' : 'hover:bg-primary-brutal/10'
                     }`}
@@ -107,19 +132,22 @@ export const NowPlaying = () => {
                     </a>
                   </button>
                 ))}
-                {/* Controls */}
+                
                 <div className="flex justify-center gap-3 mt-2 pt-2 border-t border-border-brutal/20">
                   <button
-                    onClick={() => setTrackIndex(i => (i - 1 + TRACKS.length) % TRACKS.length)}
-                    className="font-mono font-black text-sm text-text-brutal hover:text-primary-brutal brutal-transition px-2"
+                    onClick={() => handleTrackChange((trackIndex - 1 + TRACKS.length) % TRACKS.length)}
+                    className="font-mono font-black text-sm text-text-brutal hover:text-primary-brutal brutal-transition px-2 cursor-pointer"
                   >⏮</button>
                   <button
-                    onClick={() => setPlaying(p => !p)}
-                    className="font-mono font-black text-sm bg-primary-brutal text-white w-7 h-7 flex items-center justify-center brutal-border brutal-transition hover:opacity-80"
-                  >{playing ? '⏸' : '▶'}</button>
+                    onClick={() => {
+                      setBgMusicPlaying(!bgMusicPlaying);
+                      if (muted) setMuted(false);
+                    }}
+                    className="font-mono font-black text-sm bg-primary-brutal text-white w-7 h-7 flex items-center justify-center brutal-border brutal-transition hover:opacity-80 cursor-pointer"
+                  >{bgMusicPlaying && !muted ? '⏸' : '▶'}</button>
                   <button
-                    onClick={() => setTrackIndex(i => (i + 1) % TRACKS.length)}
-                    className="font-mono font-black text-sm text-text-brutal hover:text-primary-brutal brutal-transition px-2"
+                    onClick={() => handleTrackChange((trackIndex + 1) % TRACKS.length)}
+                    className="font-mono font-black text-sm text-text-brutal hover:text-primary-brutal brutal-transition px-2 cursor-pointer"
                   >⏭</button>
                 </div>
               </div>

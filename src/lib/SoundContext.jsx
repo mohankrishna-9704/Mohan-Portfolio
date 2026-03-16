@@ -24,13 +24,53 @@ function playTone(ctx, { frequency = 440, type = 'sine', duration = 0.08, gain =
 }
 
 export const SoundProvider = ({ children }) => {
-  const [muted, setMuted] = useState(true); // default OFF — user must opt in
+  const [muted, setMuted] = useState(true); 
+  const [bgMusicPlaying, setBgMusicPlaying] = useState(false);
+  const audioRef = useRef(null);
   const ctxRef = useRef(null);
 
   const getCtx = useCallback(() => {
     if (!ctxRef.current) ctxRef.current = createAudioContext();
     if (ctxRef.current.state === 'suspended') ctxRef.current.resume();
     return ctxRef.current;
+  }, []);
+
+  // Initialize background music audio object
+  useEffect(() => {
+    audioRef.current = new Audio();
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.4;
+    
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  // Handle music play/pause based on muted state and user preference
+  useEffect(() => {
+    if (!audioRef.current) return;
+    if (muted || !bgMusicPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(() => {
+        // Autoplay might be blocked until user interacts
+        setBgMusicPlaying(false);
+      });
+    }
+  }, [muted, bgMusicPlaying]);
+
+  const toggleMusic = useCallback((url) => {
+    if (!audioRef.current) return;
+    
+    if (url && audioRef.current.src !== url) {
+      audioRef.current.src = url;
+      setBgMusicPlaying(true);
+    } else {
+      setBgMusicPlaying(prev => !prev);
+    }
   }, []);
 
   const play = useCallback((type) => {
@@ -56,7 +96,6 @@ export const SoundProvider = ({ children }) => {
         playTone(ctx, { frequency: 300, type: 'sawtooth', duration: 0.06, gain: 0.04, decay: 0.04 });
         break;
       case 'terminal':
-        // Typewriter click
         playTone(ctx, { frequency: 1200, type: 'square', duration: 0.015, gain: 0.05, decay: 0.01 });
         break;
       default:
@@ -65,7 +104,7 @@ export const SoundProvider = ({ children }) => {
   }, [muted, getCtx]);
 
   return (
-    <SoundContext.Provider value={{ muted, setMuted, play }}>
+    <SoundContext.Provider value={{ muted, setMuted, play, bgMusicPlaying, setBgMusicPlaying, toggleMusic }}>
       {children}
     </SoundContext.Provider>
   );
