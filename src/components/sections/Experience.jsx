@@ -87,10 +87,10 @@ const ExperienceCard = ({ exp, index }) => {
 export const Experience = () => {
   const experiences = [
     {
-      title: "Bachelor of Engineering in CSE",
-      company: "Sri Venkateswara College of Engineering and Technology",
+      title: "B.Tech in Computer Science and Engineering",
+      company: "Malla Reddy College of Engineering",
       date: "2022 – 2026",
-      type: "Chittoor, AP • CGPA: 7.5",
+      type: "Hyderabad, Telangana • CGPA: 7.5",
       icon: <GraduationCap className="w-5 h-5 text-white" />,
       color: "bg-primary-brutal text-white",
       bullets: [
@@ -100,34 +100,6 @@ export const Experience = () => {
         "Active participant in hackathons and technical fests."
       ],
       courses: ["Data Structures", "Machine Learning", "DBMS", "Operating Systems", "Deep Learning", "Cloud Computing"]
-    },
-    {
-      title: "Class XII (Intermediate)",
-      company: "Sri Chaitanya Junior College",
-      date: "2020 – 2022",
-      type: "Andhra Pradesh • 91.2%",
-      icon: <BookOpen className="w-5 h-5 text-white" />,
-      color: "bg-secondary-brutal text-white",
-      bullets: [
-        "Maths, Physics, and Chemistry stream.",
-        "Scored 91.2% in state board examinations.",
-        "Developed foundational analytical and problem-solving skills."
-      ],
-      courses: ["Mathematics", "Physics", "Chemistry"]
-    },
-    {
-      title: "Class X (SSC)",
-      company: "ZP High School",
-      date: "2019 – 2020",
-      type: "Andhra Pradesh • 97.5%",
-      icon: <Award className="w-5 h-5 text-white" />,
-      color: "bg-primary-brutal text-white",
-      bullets: [
-        "Scored 97.5% in state board SSC examinations.",
-        "School topper in Mathematics and Science.",
-        "Recipient of the State Merit Scholarship."
-      ],
-      courses: ["Mathematics", "Science", "Social Studies", "English"]
     }
   ];
 

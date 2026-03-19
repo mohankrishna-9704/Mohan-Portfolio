@@ -96,9 +96,9 @@ const EduCard = ({ edu, index }) => {
 export const Education = () => {
   const educations = [
     {
-      degree: "B.E. in Computer Science",
-      institution: "Sri Venkateswara College of Engineering and Technology",
-      location: "Chittoor, AP",
+      degree: "B.Tech in Computer Science and Engineering",
+      institution: "Malla Reddy College of Engineering",
+      location: "Hyderabad, Telangana",
       period: "2022 – 2026",
       grade: "CGPA: 7.5",
       color: "bg-primary-brutal",
@@ -110,36 +110,6 @@ export const Education = () => {
         "Active participant in hackathons and technical fests."
       ],
       courses: ["Data Structures", "Machine Learning", "DBMS", "Operating Systems", "Deep Learning", "Cloud Computing"]
-    },
-    {
-      degree: "Class XII (Intermediate)",
-      institution: "Sri Chaitanya Junior College",
-      location: "Andhra Pradesh",
-      period: "2020 – 2022",
-      grade: "91.2%",
-      color: "bg-secondary-brutal",
-      icon: <BookOpen className="w-5 h-5 text-white" />,
-      highlights: [
-        "Maths, Physics, and Chemistry stream.",
-        "Scored 91.2% in state board examinations.",
-        "Developed foundational analytical and problem-solving skills."
-      ],
-      courses: ["Mathematics", "Physics", "Chemistry"]
-    },
-    {
-      degree: "Class X (SSC)",
-      institution: "ZP High School",
-      location: "Andhra Pradesh",
-      period: "2019 – 2020",
-      grade: "97.5%",
-      color: "bg-primary-brutal",
-      icon: <Award className="w-5 h-5 text-white" />,
-      highlights: [
-        "Scored 97.5% in state board SSC examinations.",
-        "School topper in Mathematics and Science.",
-        "Recipient of the State Merit Scholarship."
-      ],
-      courses: ["Mathematics", "Science", "Social Studies", "English"]
     }
   ];
 
