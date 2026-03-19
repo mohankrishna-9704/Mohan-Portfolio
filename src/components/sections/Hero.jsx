@@ -148,9 +148,18 @@ export const Hero = () => {
                     <Linkedin className="w-6 h-6" />
                   </Button>
                 </a>
-                <Button variant="white" onClick={() => alert('Resume downloading...')} className="p-4 w-full justify-center text-primary-brutal">
-                  <FileText className="w-6 h-6" />
-                </Button>
+                <a 
+                  href="/Mohan Krishna Patam Resume.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex-1 sm:flex-none"
+                  download="Mohan_Krishna_Patam_Resume.pdf"
+                  title="View & Download Resume"
+                >
+                  <Button variant="white" className="p-4 w-full justify-center text-primary-brutal">
+                    <FileText className="w-6 h-6" />
+                  </Button>
+                </a>
               </div>
             </motion.div>
           </div>
