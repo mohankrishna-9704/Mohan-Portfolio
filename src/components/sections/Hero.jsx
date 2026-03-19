@@ -149,7 +149,7 @@ export const Hero = () => {
                   </Button>
                 </a>
                 <a 
-                  href="/Mohan Krishna Patam Resume.pdf" 
+                  href="/Mohan%20Krishna%20Patam%20Resume.pdf" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="flex-1 sm:flex-none"

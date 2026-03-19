@@ -118,7 +118,7 @@ export const SideNav = () => {
                 <a href="https://github.com/mohankrishna-9704" target="_blank" rel="noopener noreferrer" className="block w-full brutal-border bg-text-brutal text-bg-brutal text-center py-3 font-bold uppercase hover:-translate-y-1 brutal-transition brutal-shadow-sm">
                   GitHub Profile
                 </a>
-                <a href="/Mohan Krishna Patam Resume.pdf" target="_blank" rel="noopener noreferrer" className="block w-full brutal-border bg-primary-brutal text-white text-center py-3 font-bold uppercase hover:-translate-y-1 brutal-transition brutal-shadow-sm">
+                <a href="/Mohan%20Krishna%20Patam%20Resume.pdf" target="_blank" rel="noopener noreferrer" className="block w-full brutal-border bg-primary-brutal text-white text-center py-3 font-bold uppercase hover:-translate-y-1 brutal-transition brutal-shadow-sm">
                   View Resume
                 </a>
                </div>
